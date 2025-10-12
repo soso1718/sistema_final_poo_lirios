@@ -16,7 +16,7 @@ class SupplierController extends Controller
 
     public function create()
     {
-        return view('suplliers.create');
+        return view('suppliers.create');
     }
 
     public function store(Request $request)
@@ -33,7 +33,7 @@ class SupplierController extends Controller
     public function edit(string $id)
     {
         $supplier = Supplier::findOrFail($id);
-        return view('stocks.edit', compact('supplier'));
+        return view('suppliers.edit', compact('supplier'));
     }
 
 
@@ -41,7 +41,7 @@ class SupplierController extends Controller
     {
         $supplier = Supplier::findOrFail($id);
         $supplier->update($request->all());
-        return redirect()->route('supplier.index') ->with('success', 'Fornecedor editado com sucesso!');
+        return redirect()->route('suppliers.index') ->with('success', 'Fornecedor editado com sucesso!');
     }
 
  
