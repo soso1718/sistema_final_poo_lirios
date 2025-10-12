@@ -9,6 +9,11 @@
     <h1>Listagem de pacientes</h1>
     <button><a href="<?php echo e(route('patients.create')); ?>">Cadastrar um novo paciente</a></button>
 
+     <?php if(session('success')): ?>
+        <?php echo e(session('success')); ?>
+
+    <?php endif; ?> <br>
+
     <?php $__currentLoopData = $patients; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $patient): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <h2>Nome: <?php echo e($patient->name); ?></h2>
     <button><a href="<?php echo e(route('patients.edit', $patient->id)); ?>">Editar</a></button>

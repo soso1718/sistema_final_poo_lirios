@@ -3,24 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fornecedores</title>
+    <title>Editar fornecedor</title>
 </head>
 <body>
-    <h1>Fornecedores</h1>
-    <button><a href="{{route('suppliers.create')}}">Cadastrar um novo Fornecedor</a></button>
+    <h1>Editar fornecedor</h1>
+    <form action="{{route('suppliers.update', $supplier->id)}}" method="POST">
+        @method('PUT')
+        @csrf
 
-     @if(session('success'))
-        {{ session('success') }}
-    @endif <br>
+        <label>Nome: </label>
+        <input type="text" name="name" value="{{$supplier->name}}">
 
-    @foreach($suppliers as $supplier)
-    <h2>Nome: {{$supplier->name}}</h2>
-    <button><a href="{{ route('suppliers.edit', $supplier->id) }}">Editar</a></button>
-            <form action="{{ route('suppliers.destroy', $supplier->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esse fornecedor?')">Excluir</button>
-            </form>
-    @endforeach
+        <label>CNPJ: </label>
+        <input type="text" name="cnpj" value="{{$supplier->cnpj}}">
+
+        <label>Contato: </label>
+        <input type="email" name="contact" value="{{$supplier->contact}}">
+
+        <label>Produtos oferecidos: </label>
+        <input type="text" name="products_supplied" value="{{$supplier->products_supplied}}">
+
+        <input type="submit" value="Atualizar">
+
+    </form>
 </body>
 </html>

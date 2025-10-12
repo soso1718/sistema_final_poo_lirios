@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar lote</title>
+    <title>Adicionar fornecedor</title>
 </head>
 <body>
-    <h1>Adicionar lote</h1>
-    <form action="{{route('stocks.store')}}" method="POST">
+    <h1>Adicionar fornecedor</h1>
+    <form action="{{route('suppliers.store')}}" method="POST">
         @csrf
 
         <label>Nome: </label>
         <input type="text" name="name" required>
 
-        <label>Quantidade: </label>
-        <input type="integer" name="amount" required>
+        <label>CNPJ: </label>
+        <input type="string" name="cnpj" required>
 
-        <label>Categoria: </label>
-        <input type="text" name="category" required>
+        <label>Contato: </label>
+        <input type="email" name="contact" required>
 
-        <label>Validade: </label>
-        <input type="date" name="validity" required>
+        <label>Produtos fornecidos: </label>
+        <input type="string" name="products_supplied" required>
 
         <input type="submit" value="Cadastrar">
 
