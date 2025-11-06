@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar paciente</title>
+    <title>Editar profissional</title>
 </head>
 <body>
-    <h1>Editar paciente</h1>
+    <h1>Editar profissional</h1>
+
+    @if ($errors->any())
+    <ul>
+        @foreach ($errors->all() as $erro)
+            <li>{{$erro}}</li>
+        @endforeach
+    </ul>
+    @endif
+
     <form action="{{route('professionals.update', $professional->id)}}" method="POST">
         @method('PUT')
         @csrf

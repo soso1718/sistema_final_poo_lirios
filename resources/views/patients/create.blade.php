@@ -7,6 +7,14 @@
 </head>
 <body>
     <h1>Cadastrar novo paciente</h1>
+    @if ($errors->any())
+    <ul>
+        @foreach ($errors->all() as $erro)
+            <li>{{$erro}}</li>
+        @endforeach
+    </ul>
+    @endif
+
     <form action="{{route('patients.store')}}" method="POST">
         @csrf
 
@@ -22,5 +30,25 @@
         <input type="submit" value="Cadastrar">
 
     </form>
+
+    <script>
+    document.addEventListener('input', function(e) {
+    if (e.target.name === 'cpf') {
+        let v = e.target.value;
+
+        v = v.replace(/\D/g, '');
+
+        
+        if (v.length > 3 && v.length <= 6)
+            v = v.replace(/(\d{3})(\d+)/, "$1.$2");
+        else if (v.length > 6 && v.length <= 9)
+            v = v.replace(/(\d{3})(\d{3})(\d+)/, "$1.$2.$3");
+        else if (v.length > 9)
+            v = v.replace(/(\d{3})(\d{3})(\d{3})(\d+)/, "$1.$2.$3-$4");
+
+        e.target.value = v;
+    }
+});
+    </script>
 </body>
 </html>

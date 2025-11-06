@@ -3,10 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar paciente</title>
+    <title>Cadastrar profissional</title>
 </head>
 <body>
-    <h1>Cadastrar novo paciente</h1>
+    <h1>Cadastrar novo profissional</h1>
+
+    @if ($errors->any())
+    <ul>
+        @foreach ($errors->all() as $erro)
+            <li>{{$erro}}</li>
+        @endforeach
+    </ul>
+    @endif
+
+    
     <form action="{{route('professionals.store')}}" method="POST">
         @csrf
 

@@ -20,6 +20,22 @@ class StockController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|min:2',
+            'amount' => 'required|integer|min:1',
+            'category' => 'required|min:2',
+            'validity' => 'nullable|date'
+        ], [
+            'name.required'=> 'O nome do produto é obrigatório!',
+            'name.min'=> 'O nome do produto deve ter pelo menos 2 caracteres!',
+
+            'amount.required'=> 'A quantidade dos produtos é obrigatória!',
+            'amount.min'=> 'Insira pelo menos 1 produto!',
+
+            'category.required'=> 'A categoria do produto é um campo obrigatório!',
+            'category.min'=> 'A categoria do produto deve ter pelo menos 2 caracteres!'
+        ]);
+
         Stock::create($request->all());
         return redirect()->route('stocks.index') ->with('success', 'Lote adicionado com sucesso!');
     }
@@ -37,6 +53,22 @@ class StockController extends Controller
 
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'name' => 'required|min:2',
+            'amount' => 'required|integer|min:1',
+            'category' => 'required|min:2',
+            'validity' => 'nullable|date'
+        ], [
+            'name.required'=> 'O nome do produto é obrigatório!',
+            'name.min'=> 'O nome do produto deve ter pelo menos 2 caracteres!',
+
+            'amount.required'=> 'A quantidade dos produtos é obrigatória!',
+            'amount.min'=> 'Insira pelo menos 1 produto!',
+
+            'category.required'=> 'A categoria do produto é um campo obrigatório!',
+            'category.min'=> 'A categoria do produto deve ter pelo menos 2 caracteres!'
+        ]);
+
         $stock = Stock::findOrFail($id);
         $stock->update($request->all());
         return redirect()->route('stocks.index') ->with('success', 'Lote editado com sucesso!');
