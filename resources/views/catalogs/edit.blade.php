@@ -24,7 +24,7 @@
         <input type="text" name="name" value="{{$catalog->name}}"> 
 
         <label>Preço: </label>
-        <input type="float" name="price" value="{{$catalog->price}}">
+        <input type="text" name="price" id="price" value="{{$catalog->price}}">
 
         <label>Descrição: </label>
         <input type="text" name="description" value="{{$catalog->description}}">
@@ -41,5 +41,25 @@
         <input type="submit" value="Editar">
 
     </form>
+
+   <script>
+    document.getElementById('price').addEventListener('input', function(e) {
+        let v = e.target.value.replace(/\D/g, ''); 
+
+        if (v.length === 0) {
+            e.target.value = '';
+            return;
+        }
+
+        v = (v / 100).toFixed(2);
+        v = v.replace('.', ','); 
+
+        v = v.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+        e.target.value = v;
+    });
+</script>
+
+
 </body>
 </html>

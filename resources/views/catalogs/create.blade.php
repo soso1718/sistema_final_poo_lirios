@@ -9,11 +9,9 @@
     <h1>Cadastrar novo procedimento</h1>
 
     @if ($errors->any())
-    <ul>
         @foreach ($errors->all() as $erro)
-            <li>{{$erro}}</li>
+            <p>{{$erro}}</p>
         @endforeach
-    </ul>
     @endif
 
     <form action="{{route('catalogs.store')}}" method="POST">
@@ -23,7 +21,7 @@
         <input type="text" name="name" required> 
 
         <label>Preço: </label>
-        <input type="float" name="price" required>
+        <input type="text" name="price" id="price">
 
         <label>Descrição: </label>
         <input type="text" name="description" required>
@@ -40,5 +38,25 @@
         <input type="submit" value="Cadastrar">
 
     </form>
+
+    <script>
+    document.getElementById('price').addEventListener('input', function(e) {
+        let v = e.target.value.replace(/\D/g, ''); 
+
+        if (v.length === 0) {
+            e.target.value = '';
+            return;
+        }
+
+        v = (v / 100).toFixed(2); 
+        v = v.replace('.', ','); 
+
+        v = v.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+        e.target.value = v;
+    });
+    </script>
+
+
 </body>
 </html>
