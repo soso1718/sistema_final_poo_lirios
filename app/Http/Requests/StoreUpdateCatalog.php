@@ -20,7 +20,7 @@ class StoreUpdateCatalog extends FormRequest
     {
         return [
             'name'=> 'required|min:3',
-            'price'=> 'required|numeric|min:0.01',
+            'price'=> 'required|min:0.01',
             'description'=> 'required|string',
             'average_time'=> 'required|string',
             'materials_used'=> 'required|string',

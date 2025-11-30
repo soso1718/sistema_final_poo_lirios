@@ -27,7 +27,8 @@ class ProfessionalsController extends Controller
 
     public function show(string $id)
     {
-        //
+        $professional = Professionals::findOrFail($id);
+        return view('professionals.show', compact('professional'));
     }
 
     public function edit(string $id)
@@ -47,6 +48,6 @@ class ProfessionalsController extends Controller
     {
         $professional = Professionals::findOrFail($id);
         $professional->delete();
-        return redirect()->back() ->with('success', 'Profissional excluído com sucesso!');
+        return redirect()->route('professionals.index') ->with('success', 'Profissional excluído com sucesso!');
     }
 }

@@ -28,7 +28,8 @@ class SupplierController extends Controller
 
     public function show(string $id)
     {
-        //
+        $supplier = Supplier::findOrFail($id);
+        return view('suppliers.show', compact('supplier'));
     }
 
     public function edit(string $id)
@@ -50,6 +51,6 @@ class SupplierController extends Controller
     {
         $supplier = Supplier::findOrFail($id);
         $supplier->delete();
-        return redirect()->back() ->with('success', 'Fornecedor removido com sucesso!');
+        return redirect()->route('suppliers.index') ->with('success', 'Fornecedor removido com sucesso!');
     }
 }

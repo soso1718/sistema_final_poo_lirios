@@ -27,7 +27,8 @@ class StockController extends Controller
 
     public function show(string $id)
     {
-        //
+        $stock = Stock::findOrFail($id);
+        return view('stocks.show', compact('stock'));
     }
 
     public function edit(string $id)
@@ -47,6 +48,6 @@ class StockController extends Controller
     {
         $stock = Stock::findOrFail($id);
         $stock->delete();
-        return redirect()->back() ->with('success', 'Lote excluído com sucesso!');
+        return redirect()->route('stocks.index')  ->with('success', 'Lote excluído com sucesso!');
     }
 }

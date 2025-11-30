@@ -22,13 +22,20 @@ class CatalogController extends Controller
 
     public function store(StoreUpdateCatalog $request)
     {
-        Catalog::create($request->all());
+        $data = $request->all();
+
+        if (isset($data['price'])) {
+            $data['price'] = str_replace(',', '.', $data['price']);
+        }
+
+        Catalog::create($data);
         return redirect()->route('catalogs.index') ->with('success', 'Procediemnto adicionado com sucesso!');
     }
 
     public function show(string $id)
     {
-        //
+        $catalog = Catalog::findOrFail($id);
+        return view('catalogs.show', compact('catalog'));
     }
 
   
@@ -41,8 +48,14 @@ class CatalogController extends Controller
  
     public function update(StoreUpdateCatalog $request, string $id)
     {   
+        $data = $request->all();
+
+        if (isset($data['price'])) {
+            $data['price'] = str_replace(',', '.', $data['price']);
+        }
+        
         $catalog = Catalog::findOrFail($id);
-        $catalog->update($request->all());
+        $catalog->update($data);
         return redirect()->route('catalogs.index') ->with('success', 'Procedimento atualizado com sucesso!');
     }
 
@@ -51,6 +64,6 @@ class CatalogController extends Controller
     {
         $catalog = Catalog::findOrFail($id);
         $catalog->delete();
-        return redirect()->back() ->with('success', 'Procedimento excluído com sucesso!');
+        return redirect()->route('catalogs.index') ->with('success', 'Procedimento excluído com sucesso!');
     }
 }

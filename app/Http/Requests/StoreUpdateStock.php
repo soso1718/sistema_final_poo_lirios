@@ -25,7 +25,7 @@ class StoreUpdateStock extends FormRequest
             'name' => 'required|min:2',
             'amount' => 'required|integer|min:1',
             'category' => 'required|min:2',
-            'validity' => 'nullable|date'
+            'validity' => 'nullable'
         ];
     }
 
